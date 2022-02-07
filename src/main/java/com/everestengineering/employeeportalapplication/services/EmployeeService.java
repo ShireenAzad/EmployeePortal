@@ -43,4 +43,11 @@ public class EmployeeService implements IEmployeeService{
             return employee;
 
     }
+
+    @Override
+    public Employee findByName(String firstName, String lastName) {
+        return employeeRepository.findByFirstNameAndLastName(firstName,lastName);
+    }
+
+
 }
