@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
-    @Query("select e from Employee e where e.firstName = :firstName and e.lastName =:lastName")
-    Employee findByFirstNameAndLastName(String firstName,String lastName);
+
+    List<Employee> findByFirstNameAndLastName(String firstName, String lastName);
 
 }

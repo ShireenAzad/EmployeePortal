@@ -48,7 +48,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{firstName}/{lastName}")
-    public Employee getEmployeeByName(@PathVariable(name = "firstName") String firstName,
+    public List<Employee> getEmployeeByName(@PathVariable(name = "firstName") String firstName,
                                       @PathVariable(name  ="lastName") String lastName){
         return employeeService.findByName(firstName,lastName);
     }

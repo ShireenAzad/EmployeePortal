@@ -45,7 +45,7 @@ public class EmployeeService implements IEmployeeService{
     }
 
     @Override
-    public Employee findByName(String firstName, String lastName) {
+    public List<Employee> findByName(String firstName, String lastName) {
         return employeeRepository.findByFirstNameAndLastName(firstName,lastName);
     }
 

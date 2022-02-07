@@ -15,5 +15,5 @@ public interface IEmployeeService {
 
     void delete(long id);
     Employee updateEmployee(long id, Employee employee);
-    Employee findByName(String firstName,String lastName);
+    List<Employee> findByName(String firstName,String lastName);
 }
