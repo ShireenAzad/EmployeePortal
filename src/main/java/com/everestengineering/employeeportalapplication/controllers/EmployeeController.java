@@ -56,6 +56,11 @@ public class EmployeeController {
     public List<Employee> getAllEmployeesAfterSorting(){
         return employeeService.sortAllEmployees();
     }
+    @PutMapping("/{everestEmail}/{password}")
+    public Employee updateEmployeeDetailsAfterValidation(@PathVariable(name = "everestEmail") String everestEmail,
+                                                         @PathVariable(name = "password") String password,@RequestBody Employee employee){
+        return employeeService.updateEmployeeAfterValidation(everestEmail,password,employee);
+    }
 
 
 }

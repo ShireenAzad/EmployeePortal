@@ -17,4 +17,5 @@ public interface IEmployeeService {
     Employee updateEmployee(long id, Employee employee);
     List<Employee> findByName(String firstName,String lastName);
     List<Employee> sortAllEmployees();
+    Employee updateEmployeeAfterValidation(String everestEmail,String password,Employee employee);
 }

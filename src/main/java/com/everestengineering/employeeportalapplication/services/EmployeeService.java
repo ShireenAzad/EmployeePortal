@@ -54,5 +54,14 @@ public class EmployeeService implements IEmployeeService{
         return employeeRepository.findAllByOrderByFirstNameAscLastNameAscDateOfJoinAsc();
     }
 
+    public Employee updateEmployeeAfterValidation(String everestEmail, String password, Employee employee) {
+       Optional<Employee> employeeOldDetails=employeeRepository.findByEverestEmailAndPassword(everestEmail,password);
+        if(employeeOldDetails.isEmpty())
+            return null;
+        employee.setId(employeeOldDetails.get().getId());
+        employeeRepository.save(employee);
+        return employee;
+    }
+
 
 }
