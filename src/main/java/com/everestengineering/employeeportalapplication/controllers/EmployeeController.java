@@ -52,7 +52,10 @@ public class EmployeeController {
                                       @PathVariable(name  ="lastName") String lastName){
         return employeeService.findByName(firstName,lastName);
     }
-
+    @GetMapping("/sort")
+    public List<Employee> getAllEmployeesAfterSorting(){
+        return employeeService.sortAllEmployees();
+    }
 
 
 }

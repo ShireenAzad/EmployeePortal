@@ -49,5 +49,10 @@ public class EmployeeService implements IEmployeeService{
         return employeeRepository.findByFirstNameAndLastName(firstName,lastName);
     }
 
+    @Override
+    public List<Employee> sortAllEmployees() {
+        return employeeRepository.findAllByOrderByFirstNameAscLastNameAscDateOfJoinAsc();
+    }
+
 
 }
