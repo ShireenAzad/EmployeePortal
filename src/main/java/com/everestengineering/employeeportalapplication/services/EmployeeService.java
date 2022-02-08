@@ -3,6 +3,7 @@ package com.everestengineering.employeeportalapplication.services;
 import com.everestengineering.employeeportalapplication.entities.Employee;
 import com.everestengineering.employeeportalapplication.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +53,11 @@ public class EmployeeService implements IEmployeeService{
     @Override
     public List<Employee> sortAllEmployees() {
         return employeeRepository.findAllByOrderByFirstNameAscLastNameAscDateOfJoinAsc();
+    }
+
+    @Override
+    public List<Employee> getEmployeesOnSortingRequest(String[] sort) {
+      return employeeRepository.findAll(Sort.by(Sort.Direction.ASC,sort));
     }
 
 

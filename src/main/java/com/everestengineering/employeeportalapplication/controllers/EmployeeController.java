@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/EmployeePortal")
+@RequestMapping("/api/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -55,6 +55,10 @@ public class EmployeeController {
     @GetMapping("/sort")
     public List<Employee> getAllEmployeesAfterSorting(){
         return employeeService.sortAllEmployees();
+    }
+    @GetMapping("/sorton")
+    public List<Employee> getAllEmployeesOnSortingFields(@RequestParam(defaultValue = "experience") String[] sort){
+        return employeeService.getEmployeesOnSortingRequest(sort);
     }
 
 

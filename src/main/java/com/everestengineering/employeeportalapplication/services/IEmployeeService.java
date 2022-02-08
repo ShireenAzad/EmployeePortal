@@ -17,4 +17,6 @@ public interface IEmployeeService {
     Employee updateEmployee(long id, Employee employee);
     List<Employee> findByName(String firstName,String lastName);
     List<Employee> sortAllEmployees();
+
+    List<Employee> getEmployeesOnSortingRequest(String[] sort);
 }
