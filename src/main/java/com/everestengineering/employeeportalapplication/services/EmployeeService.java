@@ -6,10 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class EmployeeService implements IEmployeeService{
     private final EmployeeRepository employeeRepository;
     @Override
@@ -50,10 +52,6 @@ public class EmployeeService implements IEmployeeService{
         return employeeRepository.findByFirstNameAndLastName(firstName,lastName);
     }
 
-    @Override
-    public List<Employee> sortAllEmployees() {
-        return employeeRepository.findAllByOrderByFirstNameAscLastNameAscDateOfJoinAsc();
-    }
 
     @Override
     public List<Employee> getEmployeesOnSortingRequest(String[] sort) {

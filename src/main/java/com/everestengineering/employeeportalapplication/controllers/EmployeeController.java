@@ -52,12 +52,8 @@ public class EmployeeController {
                                       @PathVariable(name  ="lastName") String lastName){
         return employeeService.findByName(firstName,lastName);
     }
-    @GetMapping("/sort")
-    public List<Employee> getAllEmployeesAfterSorting(){
-        return employeeService.sortAllEmployees();
-    }
     @GetMapping("/sorton")
-    public List<Employee> getAllEmployeesOnSortingFields(@RequestParam(defaultValue = "experience") String[] sort){
+    public List<Employee> getAllEmployeesOnSortingFields(@RequestParam(defaultValue = "firstName,lastName,dateOfJoin") String[] sort){
         return employeeService.getEmployeesOnSortingRequest(sort);
     }
 
