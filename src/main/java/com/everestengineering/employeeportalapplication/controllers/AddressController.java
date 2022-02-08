@@ -12,11 +12,11 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/EmployeePortal")
+@RequestMapping("/api/employees")
 public class AddressController {
     private final AddressService addressService;
     @GetMapping(value = "/{id}/addresses")
-    public Optional<Address> getAllAddressesByEmployeeId(@PathVariable(value = "id") Long id){
+    public Optional<Address> getAllAddressesByEmployeeId(@PathVariable(value = "employee_id") Long id){
         return addressService.getAllAddressByEmployeeId(id);
     }
 
