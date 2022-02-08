@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 
