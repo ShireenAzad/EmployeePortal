@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
+@Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 
     List<Employee> findByFirstNameAndLastName(String firstName, String lastName);
