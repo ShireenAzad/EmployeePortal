@@ -5,8 +5,10 @@ import com.everestengineering.employeeportalapplication.repositories.EmployeeRep
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class EmployeeService implements IEmployeeService{
