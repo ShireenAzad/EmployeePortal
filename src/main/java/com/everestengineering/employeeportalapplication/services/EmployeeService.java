@@ -47,4 +47,12 @@ public class EmployeeService implements IEmployeeService{
             return employee;
 
     }
+
+    public boolean checkEmployeeId(Long id) {
+        return employeeRepository.existsById(id);
+    }
+
+    public void deleteAllEmployees() {
+        employeeRepository.deleteAll();
+    }
 }
