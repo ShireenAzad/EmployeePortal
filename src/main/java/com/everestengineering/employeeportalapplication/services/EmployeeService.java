@@ -3,6 +3,8 @@ package com.everestengineering.employeeportalapplication.services;
 import com.everestengineering.employeeportalapplication.entities.Employee;
 import com.everestengineering.employeeportalapplication.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,22 +25,24 @@ public class EmployeeService implements IEmployeeService{
     }
 
     @Override
-    public Optional<Employee> getEmployeeById(Long id) {
-        return employeeRepository.findById(id);
+    public Optional<Employee> getEmployeeById(Long employeeId) {
+        return employeeRepository.findById(employeeId);
     }
 
     @Override
-    public void delete(long id) {
-        employeeRepository.deleteById(id);
+    public void delete(long employeeId) {
+        if(getEmployeeById(employeeId).isEmpty())
+           ResponseEntity.status(HttpStatus.NOT_FOUND);
+        employeeRepository.deleteById(employeeId);
 
     }
 
     @Override
-    public Employee updateEmployee(long id, Employee employee) {
-        Optional<Employee>employeeData=getEmployeeById(id);
+    public Employee updateEmployee(long employeeId, Employee employee) {
+        Optional<Employee>employeeData=getEmployeeById(employeeId);
         if(employeeData.isEmpty())
             return null;
-            employee.setId(id);
+            employee.setEmployeeId(employeeId);
             employeeRepository.save(employee);
             return employee;
 
