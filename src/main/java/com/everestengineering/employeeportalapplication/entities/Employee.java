@@ -39,15 +39,15 @@ public class Employee {
     @Column(name = "date_of_join")
     private LocalDate dateOfJoin;
 
-    @Lob
+
     @Column(name = "designation", nullable = false)
     private String designation;
 
-    @Lob
+
     @Column(name = "experience")
     private String experience;
 
-    @Lob
+
     @Column(name = "bio")
     private String bio;
 

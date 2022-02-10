@@ -1,66 +1,25 @@
 package com.everestengineering.employeeportalapplication.services;
 
 import com.everestengineering.employeeportalapplication.entities.Employee;
+import com.everestengineering.employeeportalapplication.exceptions.EmployeesDataNotFoundException;
 import com.everestengineering.employeeportalapplication.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 @Service
 @RequiredArgsConstructor
-public class EmployeeService implements IEmployeeService{
+public class EmployeeService{
     private final EmployeeRepository employeeRepository;
-    @Override
-    public List<Employee>getAllEmployees() {
-        return employeeRepository.findAll();
-    }
 
-    @Override
-    public Employee addEmployee(Employee employee) {
-        employeeRepository.save(employee);
-        return employee;
-    }
-
-    @Override
-    public Optional<Employee> getEmployeeById(Long id) {
-        return employeeRepository.findById(id);
-    }
-
-    @Override
-    public void delete(long id) {
-        employeeRepository.deleteById(id);
-
-    }
-
-    @Override
-    public Employee updateEmployee(long id, Employee employee) {
-        Optional<Employee>employeeData=getEmployeeById(id);
-        if(employeeData.isEmpty())
-            return null;
-            employee.setId(id);
-            employeeRepository.save(employee);
-            return employee;
-
-    }
-
-    @Override
-    public List<Employee> findByName(String firstName, String lastName) {
-        return employeeRepository.findByFirstNameAndLastName(firstName,lastName);
-    }
-
-    @Override
-    public List<Employee> sortAllEmployees() {
-        return employeeRepository.findAllByOrderByFirstNameAscLastNameAscDateOfJoinAsc();
-    }
 
     public Employee updateEmployeeAfterValidation(String everestEmail, String password, Employee employee) {
-       Optional<Employee> employeeOldDetails=employeeRepository.findByEverestEmailAndPassword(everestEmail,password);
-        if(employeeOldDetails.isEmpty())
-            return null;
-        employee.setId(employeeOldDetails.get().getId());
+       Employee employeeOldDetails=employeeRepository.findByEverestEmailAndPassword(everestEmail,password);
+        if(employeeOldDetails!=null){
+        employee.setId(employeeOldDetails.getId());
         employeeRepository.save(employee);
-        return employee;
+        return employee;}
+        else {
+            throw new EmployeesDataNotFoundException("Invalid email or password");
+        }
     }
 
 
