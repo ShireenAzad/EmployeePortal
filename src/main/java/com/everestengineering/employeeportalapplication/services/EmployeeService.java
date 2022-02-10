@@ -1,58 +1,66 @@
 package com.everestengineering.employeeportalapplication.services;
 
 import com.everestengineering.employeeportalapplication.entities.Employee;
+import com.everestengineering.employeeportalapplication.exceptions.EmployeesDataNotFoundException;
 import com.everestengineering.employeeportalapplication.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
-public class EmployeeService implements IEmployeeService{
+public class EmployeeService {
     private final EmployeeRepository employeeRepository;
-    @Override
-    public List<Employee>getAllEmployees() {
+
+    public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
-    @Override
+
     public Employee addEmployee(Employee employee) {
         employeeRepository.save(employee);
         return employee;
     }
 
-    @Override
-    public Optional<Employee> getEmployeeById(Long employeeId) {
-        return employeeRepository.findById(employeeId);
+
+    public Employee getEmployeeById(Long employeeId) throws EmployeesDataNotFoundException {
+
+        if (employeeRepository.findById(employeeId).isEmpty()) {
+            throw new EmployeesDataNotFoundException("Employee doesn't exist");
+        }
+        return employeeRepository.getById(employeeId);
     }
 
-    @Override
+
     public void delete(long employeeId) {
-        if(getEmployeeById(employeeId).isEmpty())
-           ResponseEntity.status(HttpStatus.NOT_FOUND);
-        employeeRepository.deleteById(employeeId);
+
+        if (employeeRepository.existsById(employeeId)) {
+            employeeRepository.existsById(employeeId);
+        } else {
+            throw new EmployeesDataNotFoundException("Employee Not Found");
+        }
 
     }
 
-    @Override
+
     public Employee updateEmployee(long employeeId, Employee employee) {
-        Optional<Employee>employeeData=getEmployeeById(employeeId);
-        if(employeeData.isEmpty())
-            return null;
-            employee.setEmployeeId(employeeId);
-            employeeRepository.save(employee);
-            return employee;
+        Employee employeeData = getEmployeeById(employeeId);
+        if (employeeData == null) {
+            throw new EmployeesDataNotFoundException("Employee not found to update the details");
+        }
+        employee.setEmployeeId(employeeId);
+        employeeRepository.save(employee);
+        return employee;
 
     }
 
-    public boolean checkEmployeeId(Long id) {
-        return employeeRepository.existsById(id);
-    }
 
     public void deleteAllEmployees() {
+
+        if (getAllEmployees().size() == 0) {
+            throw new EmployeesDataNotFoundException("No employees are present");
+        }
         employeeRepository.deleteAll();
     }
 }

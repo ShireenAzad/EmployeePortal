@@ -22,13 +22,9 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Optional<Employee>> getEmployeeById(@PathVariable(name = "id") Long id) {
-        final Optional<Employee> Employee = employeeService.getEmployeeById(id);
-        if (Employee.isPresent()) {
-            return ResponseEntity.ok(Employee);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "id") Long id) {
+       Employee employee = employeeService.getEmployeeById(id);
+        return ResponseEntity.ok(employee);
     }
 
     @PostMapping(value = "")
@@ -43,23 +39,14 @@ public class EmployeeController {
     }
 
     @DeleteMapping("")
-    public ResponseEntity<Void> deleteAllEmployees() {
-        if (employeeService.getAllEmployees().size() != 0) {
-            employeeService.deleteAllEmployees();
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+    public void deleteAllEmployees() {
+        employeeService.deleteAllEmployees();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable(name = "id") Long id) {
-        if (employeeService.checkEmployeeId(id)) {
-            employeeService.delete(id);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
+    public void deleteEmployee(@PathVariable(name = "id") Long id) {
+        employeeService.delete(id);
     }
-
 
 }
