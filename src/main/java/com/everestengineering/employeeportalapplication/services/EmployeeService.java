@@ -27,7 +27,7 @@ public class EmployeeService {
     public Employee getEmployeeById(Long employeeId) throws EmployeesDataNotFoundException {
 
         if (employeeRepository.findById(employeeId).isEmpty()) {
-            throw new EmployeesDataNotFoundException("Employee doesn't exist");
+            throw new EmployeesDataNotFoundException("EmployeeId " + employeeId + " doesn't exist");
         }
         return employeeRepository.getById(employeeId);
     }
@@ -38,20 +38,21 @@ public class EmployeeService {
         if (employeeRepository.existsById(employeeId)) {
             employeeRepository.existsById(employeeId);
         } else {
-            throw new EmployeesDataNotFoundException("Employee Not Found");
+            throw new EmployeesDataNotFoundException("Employee with ID " + employeeId + " not Found");
         }
 
     }
 
 
     public Employee updateEmployee(long employeeId, Employee employee) {
-        Employee employeeData = getEmployeeById(employeeId);
-        if (employeeData == null) {
-            throw new EmployeesDataNotFoundException("Employee not found to update the details");
+        if (employeeRepository.existsById(employeeId)) {
+            employee.setEmployeeId(employeeId);
+            employeeRepository.save(employee);
+            return employee;
+        }else{
+            throw new EmployeesDataNotFoundException("Employee ID " + employeeId + " not present to update the details.");
         }
-        employee.setEmployeeId(employeeId);
-        employeeRepository.save(employee);
-        return employee;
+
 
     }
 
