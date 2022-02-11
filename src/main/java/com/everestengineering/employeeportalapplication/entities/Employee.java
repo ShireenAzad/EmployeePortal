@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 @Data
 @Entity
 @Table(name = "employee")
@@ -46,7 +47,6 @@ public class Employee {
 
     @Column(name = "experience")
     private String experience;
-
 
     @Column(name = "bio")
     private String bio;
