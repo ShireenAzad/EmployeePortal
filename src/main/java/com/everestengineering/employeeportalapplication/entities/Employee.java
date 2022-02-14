@@ -17,11 +17,11 @@ public class Employee {
     @Column(name = "employee_id", nullable = false)
     private Long employeeId;
 
-
+    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-
+    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
     @Column(name = "last_name", nullable = false)
     private String lastName;
     @Email
@@ -33,7 +33,8 @@ public class Employee {
     @Column(name = "password", nullable = false)
     private String password;
 
-
+    @Email
+    @Pattern(regexp = ".+@gmail.com",message = "Please enter valid gmail address")
     @Column(name = "personal_email")
     private String personalEmail;
 
