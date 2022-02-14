@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 @Data
 @Entity
 @Table(name = "employee")
@@ -39,15 +40,15 @@ public class Employee {
     @Column(name = "date_of_join")
     private LocalDate dateOfJoin;
 
-    @Lob
+
     @Column(name = "designation", nullable = false)
     private String designation;
 
-    @Lob
+
     @Column(name = "experience")
     private String experience;
 
-    @Lob
+
     @Column(name = "bio")
     private String bio;
 
