@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Transactional
 @Service
 @RequiredArgsConstructor
@@ -51,7 +52,7 @@ public class EmployeeService {
 
             employeeRepository.save(employee);
             return employee;
-        }else{
+        } else {
             throw new EmployeesDataNotFoundException("Employee ID " + employeeId + " not present to update the details.");
         }
 
