@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,7 +34,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable(name = "id") Long id, @RequestBody Employee employee) {
+    public Employee updateEmployee(@PathVariable(name = "id") Long id, @Valid @RequestBody Employee employee) {
 
         return employeeService.updateEmployee(id, employee);
     }

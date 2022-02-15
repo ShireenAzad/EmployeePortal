@@ -1,12 +1,18 @@
 package com.everestengineering.employeeportalapplication.entities;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "employee", uniqueConstraints = {
         @UniqueConstraint(name = "uc_employee_everest_email", columnNames = {"everest_email"})

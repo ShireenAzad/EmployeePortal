@@ -1,9 +1,12 @@
 package com.everestengineering.employeeportalapplication.entities;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "address")
 public class Address {

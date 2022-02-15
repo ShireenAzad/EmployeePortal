@@ -5,9 +5,10 @@ import com.everestengineering.employeeportalapplication.exceptions.EmployeesData
 import com.everestengineering.employeeportalapplication.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
@@ -36,7 +37,7 @@ public class EmployeeService {
     public void delete(long employeeId) {
 
         if (employeeRepository.existsById(employeeId)) {
-            employeeRepository.existsById(employeeId);
+            employeeRepository.deleteById(employeeId);
         } else {
             throw new EmployeesDataNotFoundException("Employee with ID " + employeeId + " not Found");
         }
@@ -47,6 +48,7 @@ public class EmployeeService {
     public Employee updateEmployee(long employeeId, Employee employee) {
         if (employeeRepository.existsById(employeeId)) {
             employee.setEmployeeId(employeeId);
+
             employeeRepository.save(employee);
             return employee;
         }else{
@@ -59,9 +61,6 @@ public class EmployeeService {
 
     public void deleteAllEmployees() {
 
-        if (getAllEmployees().size() == 0) {
-            throw new EmployeesDataNotFoundException("No employees are present");
-        }
         employeeRepository.deleteAll();
     }
 }
