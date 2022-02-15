@@ -14,8 +14,6 @@ public class EmployeeController {
    @PutMapping("/{everestEmail}/{password}")
     public Employee updateEmployeeDetailsAfterValidation(@PathVariable(name = "everestEmail") String everestEmail,
                                                          @PathVariable(name = "password") String password,@RequestBody Employee employee){
-       System.out.println(everestEmail);
-       System.out.println(password);
         return employeeService.updateEmployeeAfterValidation(everestEmail,password,employee);
     }
 

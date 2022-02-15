@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
+
 @Data
 @Entity
 @Table(name = "employee")
@@ -50,5 +52,8 @@ public class Employee {
 
     @Column(name = "bio")
     private String bio;
+
+    @OneToMany
+    private Set<Address> address;
 
 }
