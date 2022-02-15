@@ -1,13 +1,19 @@
 package com.everestengineering.employeeportalapplication.entities;
 
-import javax.persistence.*;
+import lombok.*;
 
+import javax.persistence.*;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "address")
 public class Address {
     @Id
+
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Long addressId;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "employee_id", nullable = false)
@@ -40,4 +46,5 @@ public class Address {
     @Column(name = "address_type", nullable = false)
     private String addressType;
 
-    }
+
+}

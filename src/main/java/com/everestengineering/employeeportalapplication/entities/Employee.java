@@ -1,29 +1,37 @@
 package com.everestengineering.employeeportalapplication.entities;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.Set;
-
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "employee")
+@Table(name = "employee", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_employee_everest_email", columnNames = {"everest_email"})
+})
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id", nullable = false)
-    private Long id;
+    private Long employeeId;
 
-
+    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-
+    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
     @Column(name = "last_name", nullable = false)
     private String lastName;
-
-
+    @Email
+    @Pattern(regexp = ".+@everest.engineering",message = "Please enter valid Everest email address")
     @Column(name = "everest_email", nullable = false)
     private String everestEmail;
 
@@ -31,7 +39,8 @@ public class Employee {
     @Column(name = "password", nullable = false)
     private String password;
 
-
+    @Email
+    @Pattern(regexp = ".+@gmail.com",message = "Please enter valid gmail address")
     @Column(name = "personal_email")
     private String personalEmail;
 
@@ -52,8 +61,5 @@ public class Employee {
 
     @Column(name = "bio")
     private String bio;
-
-    @OneToMany
-    private Set<Address> address;
 
 }

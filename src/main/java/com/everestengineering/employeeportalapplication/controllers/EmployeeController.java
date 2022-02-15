@@ -5,6 +5,8 @@ import com.everestengineering.employeeportalapplication.services.EmployeeService
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/employees")
@@ -13,7 +15,7 @@ public class EmployeeController {
 
    @PutMapping("/{everestEmail}/{password}")
     public Employee updateEmployeeDetailsAfterValidation(@PathVariable(name = "everestEmail") String everestEmail,
-                                                         @PathVariable(name = "password") String password,@RequestBody Employee employee){
+                                                         @PathVariable(name = "password") String password, @Valid @RequestBody Employee employee){
         return employeeService.updateEmployeeAfterValidation(everestEmail,password,employee);
     }
 
