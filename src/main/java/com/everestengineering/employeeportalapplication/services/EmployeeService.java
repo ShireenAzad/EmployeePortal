@@ -17,7 +17,7 @@ public class EmployeeService{
     public Employee updateEmployeeAfterValidation(String everestEmail, String password, Employee employee) {
        Employee employeeOldDetails=employeeRepository.findByEverestEmailAndPassword(everestEmail,password);
         if(employeeOldDetails!=null){
-        employee.setId(employeeOldDetails.getId());
+        employee.setEmployeeId(employeeOldDetails.getEmployeeId());
         employeeRepository.save(employee);
         return employee;}
         else {
