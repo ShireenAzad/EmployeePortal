@@ -1,6 +1,5 @@
 package com.everestengineering.employeeportalapplication.services;
 
-import com.everestengineering.employeeportalapplication.entities.Employee;
 import com.everestengineering.employeeportalapplication.exceptions.EmployeeNotFoundException;
 import com.everestengineering.employeeportalapplication.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,16 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Employee updateEmployee(long employeeId, Employee employee) {
+    public void delete(long employeeId) {
+
         if (employeeRepository.existsById(employeeId)) {
-            employee.setEmpId(employeeId);
-
-            employeeRepository.save(employee);
-            return employee;
+            employeeRepository.deleteById(employeeId);
         } else {
-            throw new EmployeeNotFoundException("Employee ID " + employeeId + " not present to update the details.");
+            throw new EmployeeNotFoundException("Employee with ID " + employeeId + " not Found");
         }
-
 
     }
 }
