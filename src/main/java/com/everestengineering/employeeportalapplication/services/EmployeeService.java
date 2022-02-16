@@ -13,12 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Employee getEmployeeById(Long employeeId) throws EmployeeNotFoundException {
-
-        if (employeeRepository.findById(employeeId).isEmpty()) {
-            throw new EmployeeNotFoundException("EmployeeId " + employeeId + " doesn't exist");
-        }
-        return employeeRepository.getById(employeeId);
+    public Employee addEmployee(Employee employee) {
+        employeeRepository.save(employee);
+        return employee;
     }
 
 
