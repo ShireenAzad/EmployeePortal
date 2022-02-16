@@ -15,9 +15,9 @@ import javax.validation.Valid;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @PostMapping(value = "")
-    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) {
-        final Employee savedEmployee = employeeService.addEmployee(employee);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);
+    @PutMapping("/{id}")
+    public Employee updateEmployee(@PathVariable(name = "id") Long id, @Valid @RequestBody Employee employee) {
+
+        return employeeService.updateEmployee(id, employee);
     }
 }

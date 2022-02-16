@@ -13,10 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Employee addEmployee(Employee employee) {
-        employeeRepository.save(employee);
-        return employee;
+    public Employee updateEmployee(long employeeId, Employee employee) {
+        if (employeeRepository.existsById(employeeId)) {
+            employee.setEmpId(employeeId);
+
+            employeeRepository.save(employee);
+            return employee;
+        } else {
+            throw new EmployeeNotFoundException("Employee ID " + employeeId + " not present to update the details.");
+        }
+
+
     }
-
-
 }
