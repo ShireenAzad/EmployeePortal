@@ -1,13 +1,11 @@
 package com.everestengineering.employeeportalapplication.services;
 
-import com.everestengineering.employeeportalapplication.entities.Employee;
+import com.everestengineering.employeeportalapplication.entities.EmployeesData;
 import com.everestengineering.employeeportalapplication.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Transactional
 @Service
@@ -15,8 +13,8 @@ import java.util.List;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public List<Employee> getAllEmployees(Pageable pageable) {
-        return employeeRepository.findAll(pageable).getContent();
+    public EmployeesData getAllEmployees(Pageable pageable) {
+       return new EmployeesData( employeeRepository.findAll(pageable));
     }
 
 
