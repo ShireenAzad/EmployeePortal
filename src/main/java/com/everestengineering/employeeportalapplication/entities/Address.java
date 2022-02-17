@@ -17,4 +17,5 @@ public class Address {
     private String addrLine2;
     private String city;
     private String state;
+    private Long zipCode;
 }
