@@ -16,6 +16,9 @@ public class EmployeeService {
     public Employee updateEmployee(long employeeId, Employee employee) {
         if (employeeRepository.existsById(employeeId)) {
             employee.setEmpId(employeeId);
+            Employee existingEmployee=employeeRepository.getById(employeeId);
+            employee.getPresentAddress().setId(existingEmployee.getPresentAddress().getId());
+            employee.getPermanentAddress().setId(existingEmployee.getPermanentAddress().getId());
 
             employeeRepository.save(employee);
             return employee;
