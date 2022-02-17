@@ -3,7 +3,6 @@ package com.everestengineering.employeeportalapplication.services;
 import com.everestengineering.employeeportalapplication.entities.Employee;
 import com.everestengineering.employeeportalapplication.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

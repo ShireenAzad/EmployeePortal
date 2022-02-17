@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 
@@ -32,9 +33,14 @@ public class Employee {
     @Column(unique = true,nullable = false)
     @Pattern(regexp = ".+@gmail.com",message = "Please enter valid gmail address")
     private String personalEmailId;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Please provide a date.")
     private Date dateOfBirth;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Please provide a date.")
     private Date dateOfJoin;
     private String designation;
+    @Size(min=0,max=80,message = "Please enter the experience between 0 to 80")
     private Long experience;
     private String bio;
     @OneToOne(cascade = CascadeType.ALL)
