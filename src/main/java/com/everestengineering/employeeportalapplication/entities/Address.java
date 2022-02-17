@@ -1,44 +1,24 @@
 package com.everestengineering.employeeportalapplication.entities;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+
+@Setter
+@Getter
 @Entity
-@Table(name = "address")
+@Table(name = "addresses")
 public class Address {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
-
-
-    @Column(name = "house_number")
-    private String houseNumber;
-
-
-    @Column(name = "street_name")
-    private String streetName;
-
-
-    @Column(name = "city", nullable = false)
+    private String addrLine1;
+    private String addrLine2;
+    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
     private String city;
-
-
-    @Column(name = "state", nullable = false)
+    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
     private String state;
-
-
-    @Column(name = "country", nullable = false)
-    private String country;
-
-    @Column(name = "zipcode", nullable = false)
     private Long zipcode;
-
-
-    @Column(name = "address_type", nullable = false)
-    private String addressType;
-
-
 }

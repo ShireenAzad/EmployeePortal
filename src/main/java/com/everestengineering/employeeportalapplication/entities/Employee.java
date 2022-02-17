@@ -3,52 +3,48 @@ package com.everestengineering.employeeportalapplication.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.Date;
+
 
 @Data
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id", nullable = false)
-    private Long id;
-
-
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "id", nullable = false)
+    private Long empId;
+    @NotEmpty
+    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
     private String firstName;
-
-
-    @Column(name = "last_name", nullable = false)
+    @NotEmpty
+    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
     private String lastName;
-
-
-    @Column(name = "everest_email", nullable = false)
-    private String everestEmail;
-
-
-    @Column(name = "password", nullable = false)
+    @Column(unique = true,nullable = false)
+    @Pattern(regexp = ".+@everest.engineering",message = "Please enter valid Everest email address")
+    private String everestEmailId;
+    @NotEmpty
     private String password;
-
-
-    @Column(name = "personal_email")
-    private String personalEmail;
-
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
-    @Column(name = "date_of_join")
-    private LocalDate dateOfJoin;
-
-
-    @Column(name = "designation", nullable = false)
+    @Column(unique = true,nullable = false)
+    @Pattern(regexp = ".+@gmail.com",message = "Please enter valid gmail address")
+    private String personalEmailId;
+    private Date dateOfBirth;
+    private Date dateOfJoin;
     private String designation;
-
-
-    @Column(name = "experience")
-    private String experience;
-
-    @Column(name = "bio")
+    @Size(min=0,max=80,message = "Please enter the experience between 0 to 80")
+    private Long experience;
     private String bio;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "present_addr_id")
+    private Address presentAddress;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "permanent_addr_id")
+    private Address permanentAddress;
+
+
 
 }
