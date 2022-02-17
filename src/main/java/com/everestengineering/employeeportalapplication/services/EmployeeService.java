@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Transactional
 @Service
 @RequiredArgsConstructor
@@ -14,8 +16,18 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     public Employee addEmployee(Employee employee) {
-        employeeRepository.save(employee);
-        return employee;
+        Optional<Employee>existingEmployee=employeeRepository.findByEverestEmailId(employee.getEverestEmailId());
+        if(existingEmployee.isEmpty()){
+            existingEmployee=employeeRepository.findByPersonalEmailId(employee.getPersonalEmailId());
+            if(existingEmployee.isEmpty()){
+        employeeRepository.save(employee);}
+            else{
+                throw new EmployeeNotFoundException("Employee with Personal Email already exists");
+            }
+        return employee;}
+        else{
+            throw new EmployeeNotFoundException("Employee with EverestEmail already exists.");
+        }
     }
 
 

@@ -1,12 +1,10 @@
 package com.everestengineering.employeeportalapplication.entities;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
@@ -20,22 +18,25 @@ public class Employee {
     @Column(name = "id", nullable = false)
     private Long empId;
     @NotEmpty
-    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
+    @Pattern(regexp = "[A-Za-z]*", message = "Please enter only alpha characters.")
     private String firstName;
     @NotEmpty
-    @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
+    @Pattern(regexp = "[A-Za-z]*", message = "Please enter only alpha characters.")
     private String lastName;
-    @Column(unique = true,nullable = false)
-    @Pattern(regexp = ".+@everest.engineering",message = "Please enter valid Everest email address")
+    @Column(unique = true, nullable = false)
+    @Pattern(regexp = ".+@everest.engineering", message = "Please enter valid Everest email address")
     private String everestEmailId;
     @NotEmpty
     private String password;
-    @Column(unique = true,nullable = false)
-    @Pattern(regexp = ".+@gmail.com",message = "Please enter valid gmail address")
+    @Column(unique = true, nullable = false)
+    @Pattern(regexp = ".+@gmail.com", message = "Please enter valid gmail address")
     private String personalEmailId;
     private Date dateOfBirth;
     private Date dateOfJoin;
+    @NotEmpty
+    @Pattern(regexp = "[A-Za-z ]*", message = "Please enter only alpha characters.")
     private String designation;
+    @Range(min = 0,max = 80,message = "Please enter the experience between 0 to 80")
     private Long experience;
     private String bio;
     @OneToOne(cascade = CascadeType.ALL)
@@ -45,7 +46,6 @@ public class Employee {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "permanent_addr_id")
     private Address permanentAddress;
-
 
 
 }
