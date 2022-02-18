@@ -6,20 +6,19 @@ import com.everestengineering.employeeportalapplication.repositories.EmployeeRep
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
-    public Page<Employee> getEmployeesOnSortingRequest( Pageable pageable) {
+    public EmployeesData getEmployeesOnSortingRequest( Pageable pageable) {
 
         return new EmployeesData(employeeRepository.findAll(pageable));
+
     }
 
 

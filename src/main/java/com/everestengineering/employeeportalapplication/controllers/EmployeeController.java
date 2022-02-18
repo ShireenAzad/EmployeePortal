@@ -1,6 +1,7 @@
 package com.everestengineering.employeeportalapplication.controllers;
 
 import com.everestengineering.employeeportalapplication.entities.Employee;
+import com.everestengineering.employeeportalapplication.entities.EmployeesData;
 import com.everestengineering.employeeportalapplication.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping("")
-    public Page<Employee> getAllEmployeesOnSortingFields(@PageableDefault(page = 1, size = 2, sort = {"firstName","lastName","dateOfJoin"}, direction = Sort.Direction.ASC) Pageable pageable) {
+    public EmployeesData getAllEmployeesOnSortingFields(@PageableDefault(page = 1, size = 2, sort = {"firstName","lastName","dateOfJoin"}, direction = Sort.Direction.ASC) Pageable pageable) {
         return employeeService.getEmployeesOnSortingRequest(pageable);
     }
 
