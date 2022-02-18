@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -22,8 +23,18 @@ public class EmployeeService {
 
 
     public Employee addEmployee(Employee employee) {
-        employeeRepository.save(employee);
-        return employee;
+        Optional<Employee> existingEmployee=employeeRepository.findByEverestEmailId(employee.getEverestEmailId());
+        if(existingEmployee.isEmpty()){
+            existingEmployee=employeeRepository.findByPersonalEmailId(employee.getPersonalEmailId());
+            if(existingEmployee.isEmpty()){
+                employeeRepository.save(employee);}
+            else{
+                throw new EmployeesDataNotFoundException("Employee with Personal Email already exists");
+            }
+            return employee;}
+        else{
+            throw new EmployeesDataNotFoundException("Employee with EverestEmail already exists.");
+        }
     }
 
 

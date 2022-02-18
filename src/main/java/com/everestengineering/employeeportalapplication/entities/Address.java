@@ -15,9 +15,10 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String addrLine1;
-    private String addrLine2;
+    private String addressLine1;
+    private String addressLine2;
     private String city;
     private String state;
+    private Long zipCode;
 }
 
