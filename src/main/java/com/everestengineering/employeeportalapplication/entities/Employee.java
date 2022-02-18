@@ -1,65 +1,50 @@
+
 package com.everestengineering.employeeportalapplication.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+import java.util.Date;
+
+
+@Data
 @Entity
-@Table(name = "employee", uniqueConstraints = {
-        @UniqueConstraint(name = "uc_employee_everest_email", columnNames = {"everest_email"})
-})
+@Table(name = "employees")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id", nullable = false)
-    private Long employeeId;
-
+    @Column(name = "id", nullable = false)
+    private Long empId;
+    @NotEmpty
     @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
-    @Column(name = "first_name", nullable = false)
     private String firstName;
-
+    @NotEmpty
     @Pattern(regexp = "[A-Za-z]*",message = "Please enter only alpha characters.")
-    @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Email
+    @Column(unique = true,nullable = false)
     @Pattern(regexp = ".+@everest.engineering",message = "Please enter valid Everest email address")
-    @Column(name = "everest_email", nullable = false)
-    private String everestEmail;
-
-
-    @Column(name = "password", nullable = false)
+    private String everestEmailId;
+    @NotEmpty
     private String password;
-
-    @Email
+    @Column(unique = true,nullable = false)
     @Pattern(regexp = ".+@gmail.com",message = "Please enter valid gmail address")
-    @Column(name = "personal_email")
-    private String personalEmail;
-
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
-    @Column(name = "date_of_join")
-    private LocalDate dateOfJoin;
-
-
-    @Column(name = "designation", nullable = false)
+    private String personalEmailId;
+    private Date dateOfBirth;
+    private Date dateOfJoin;
     private String designation;
-
-
-    @Column(name = "experience")
-    private String experience;
-
-
-    @Column(name = "bio")
+    private Long experience;
     private String bio;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "present_addr_id")
+    private Address presentAddress;
 
-   }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "permanent_addr_id")
+    private Address permanentAddress;
+
+
+
+}
+

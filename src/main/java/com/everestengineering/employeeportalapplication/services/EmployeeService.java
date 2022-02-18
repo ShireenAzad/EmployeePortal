@@ -1,3 +1,4 @@
+
 package com.everestengineering.employeeportalapplication.services;
 
 import com.everestengineering.employeeportalapplication.entities.Employee;
@@ -48,7 +49,7 @@ public class EmployeeService {
 
     public Employee updateEmployee(long employeeId, Employee employee) {
         if (employeeRepository.existsById(employeeId)) {
-            employee.setEmployeeId(employeeId);
+            employee.setEmpId(employeeId);
 
             employeeRepository.save(employee);
             return employee;
