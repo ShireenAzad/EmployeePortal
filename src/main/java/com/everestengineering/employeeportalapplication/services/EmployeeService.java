@@ -16,15 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public EmployeesData findByName(String firstName, String lastName, Pageable pageable) {
+    public EmployeesData findByName(String name, Pageable pageable) {
 
-        if (employeeRepository.findByFirstNameAndLastName(firstName, lastName,pageable).getContent().isEmpty()){
-            throw new EmployeesDataNotFoundException("Employee  with first name pattern of " + firstName + " and last name pattern of " + lastName + " not found.");
-        }
-        else
-        {
+        if (employeeRepository.findByFirstNameContainingOrLastNameContaining(name, name,pageable).getContent().isEmpty()) {
+            throw new EmployeesDataNotFoundException("Employee  with first name pattern of " + name + " or last name pattern of " + name + " not found.");
+        } else {
 
-            return new EmployeesData(employeeRepository.findByFirstNameAndLastName(firstName, lastName, pageable));
+            return new EmployeesData(employeeRepository.findByFirstNameContainingOrLastNameContaining(name,name, pageable));
         }
 
 
