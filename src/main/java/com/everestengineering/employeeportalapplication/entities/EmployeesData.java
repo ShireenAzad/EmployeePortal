@@ -19,7 +19,7 @@ public class EmployeesData {
         this.setTotalElements(employeesData.getTotalElements());
         this.setTotalPages(employeesData.getTotalPages());
         this.setPageSize(employeesData.getSize());
-        this.setCurrentPage(employeesData.getNumber());
+        this.setCurrentPage(employeesData.getNumber()+1);
         this.setHasNext(employeesData.hasNext());
         this.setHasPrevious(employeesData.hasPrevious());
     }
