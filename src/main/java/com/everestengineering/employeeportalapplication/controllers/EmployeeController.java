@@ -16,7 +16,7 @@ public class EmployeeController {
 
     @GetMapping("/search")
     public EmployeesData getEmployeeByName(@RequestParam(name = "query") String name,
-                                           @PageableDefault(page = 1, size = 2, sort = {"empId"}, direction = Sort.Direction.ASC) Pageable pageable) {
+                                           @PageableDefault(page = 0, size = 2, sort = {"empId"}, direction = Sort.Direction.ASC) Pageable pageable) {
         return employeeService.findByName(name,pageable);
     }
 
