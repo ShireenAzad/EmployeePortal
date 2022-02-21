@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EmployeeNotFoundException.class)
