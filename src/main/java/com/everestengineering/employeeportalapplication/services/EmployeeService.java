@@ -15,11 +15,25 @@ public class EmployeeService{
 
 
     public Employee updateEmployeeAfterValidation(String everestEmail, String password, Employee employee) {
-       Employee employeeOldDetails=employeeRepository.findByEverestEmailAndPassword(everestEmail,password);
-        if(employeeOldDetails!=null){
-        employee.setEmployeeId(employeeOldDetails.getEmployeeId());
-        employeeRepository.save(employee);
-        return employee;}
+       Employee employeeOldDetails=employeeRepository.findByEverestEmailIdAndPassword(everestEmail,password);
+        if(employeeOldDetails!=null) {
+            Employee employeeExistingWithEverestEmail=employeeRepository.findByEverestEmailId(employee.getEverestEmailId());
+            Employee employeeExistingWithPersonalEmail=employeeRepository.findByPersonalEmailId(employee.getPersonalEmailId());
+            if (((employeeExistingWithEverestEmail!=null ) && (employeeExistingWithEverestEmail.getEmpId()!=employeeOldDetails.getEmpId()))
+            || ((employeeExistingWithPersonalEmail!=null) && employeeExistingWithPersonalEmail.getEmpId()!=employeeOldDetails.getEmpId()))
+            {
+                throw new EmployeesDataNotFoundException("EverestEmail or PersonalEmail already exists");
+            }
+            else
+            {
+                employee.setEmpId(employeeOldDetails.getEmpId());
+                employee.getPresentAddress().setId(employeeOldDetails.getPresentAddress().getId());
+                employee.getPermanentAddress().setId(employeeOldDetails.getPermanentAddress().getId());
+                employeeRepository.save(employee);
+                return employee;
+
+            }
+        }
         else {
             throw new EmployeesDataNotFoundException("Invalid email or password");
         }
