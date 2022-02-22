@@ -9,3 +9,4 @@ public class EmployeesDataNotFoundException extends RuntimeException {
         super(message);
     }
 }
+

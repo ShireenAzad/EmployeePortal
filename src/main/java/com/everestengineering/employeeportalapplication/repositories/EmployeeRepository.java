@@ -12,5 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends JpaRepository<Employee,Long>, JpaSpecificationExecutor<Employee> {
 
     Page<Employee> findByFirstNameContainingOrLastNameContaining(String firstName,String lastName, Pageable pageable);
-
+   Optional<Employee> findByEverestEmailId(String everestEmail);
+    Optional<Employee> findByPersonalEmailId(String personalEmail);
 }
+

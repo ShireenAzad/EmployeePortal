@@ -1,3 +1,4 @@
+
 package com.everestengineering.employeeportalapplication.entities;
 
 import lombok.Data;
@@ -45,6 +46,11 @@ public class Employee {
     @JoinColumn(name = "permanent_addr_id")
     private Address permanentAddress;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "permanent_addr_id")
+    private Address permanentAddress;
+
 
 
 }
+
