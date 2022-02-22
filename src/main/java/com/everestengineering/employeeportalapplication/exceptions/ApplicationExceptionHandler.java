@@ -42,4 +42,3 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     }
 
 }
-

@@ -1,4 +1,3 @@
-
 package com.everestengineering.employeeportalapplication.entities;
 
 import lombok.Data;
