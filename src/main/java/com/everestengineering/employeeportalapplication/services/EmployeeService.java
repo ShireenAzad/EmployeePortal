@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -19,8 +18,8 @@ import java.util.Optional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public EmployeesData getAllEmployees(Pageable pageable) {
+        return new EmployeesData( employeeRepository.findAll(pageable));
     }
 
     public Employee getEmployeeById(Long employeeId) throws EmployeesDataNotFoundException {

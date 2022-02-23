@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,10 +31,9 @@ public class EmployeeController {
 
 
     @GetMapping(value = "")
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public EmployeesData getAllEmployees(@PageableDefault(page = 1,size = 2,sort = {"empId"},direction = Sort.Direction.ASC) Pageable pageable) {
+        return employeeService.getAllEmployees(pageable);
     }
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "id") Long id) {
         Employee employee = employeeService.getEmployeeById(id);
