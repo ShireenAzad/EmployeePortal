@@ -7,6 +7,7 @@ import com.everestengineering.employeeportalapplication.services.EmployeeService
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -38,6 +39,7 @@ public class CreateEmployeeTest {
     void tearDown() {
     }
     @Test
+    @DisplayName("Employee Status and Body is returned if Employee created successfully.")
     void shouldCreateNewEmployee() throws Exception {
         Employee employee=new Employee(1L, "Shireen", "Syed", "shireen.syed@everest.engineering", "12345", "syed@gmail.com", null, null, "Software CraftsPerson", null, null, new Address(1L, "1/1534-1", "Yerramukkapalli", "Kadapa", "AP", 516004L), new Address(2L, "1/1584-1", "Balaji Nagar", "Kadapa", "AP", 516007L));
 
@@ -54,6 +56,7 @@ public class CreateEmployeeTest {
     }
 
     @Test
+    @DisplayName("If All not Empty fields are entered,bad request is thrown")
     void shouldFailToCreateNewEmployee() throws Exception {
         Employee employee = new Employee(1L, "Shireen", "Syed", "null", "12345", "syed@gmail.com",null, null, null, null, null, null, null);
 
