@@ -52,6 +52,7 @@ const EmployeeComponent = () => {
       <h1>Employee Portal</h1>
       <hr />
 
+
       <div id={"employeeList"}>
         <table className={"table"}>
           <thead>
