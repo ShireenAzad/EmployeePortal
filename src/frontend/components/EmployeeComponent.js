@@ -25,6 +25,15 @@ const EmployeeComponent = () => {
       setPersonalEmailId(response.data.personalEmailId);
     });
   };
+  const searchEmployeeByFirstOrLastName = () => {
+    employeeService
+      .getEmployeeByFirstNameOrLastName(empName)
+      .then((response) => {
+        console.log(response)
+        setEmployees(response.data.data);
+      })
+      .catch((e) => console.log("error", e));
+  };
 
   const getAllEmployees = () => {
     employeeService
@@ -52,6 +61,26 @@ const EmployeeComponent = () => {
       <h1>Employee Portal</h1>
       <hr />
 
+      <div className="ui search">
+        <div className="ui icon input">
+        <input
+          type="text"
+          className="form-group col-md-5"
+          placeholder="Search  Employee Name"
+          value={empName}
+          onChange={(e) => setEmpName(e.target.value)}
+        /><i className="searchicon"></i>
+          <button
+                      className={"btn btn-danger"}
+                      onClick={searchEmployeeByFirstOrLastName}
+                    >
+                      Search
+                    </button>
+          <Link to="/add" className="btn btn-primary btn-lg float-end">
+            Add Employee
+          </Link>
+        </div>
+      </div>
 
       <div id={"employeeList"}>
         <table className={"table"}>
