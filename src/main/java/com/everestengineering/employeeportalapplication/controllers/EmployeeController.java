@@ -25,10 +25,8 @@ public class EmployeeController {
     @GetMapping("/search")
     public EmployeesData getEmployeeByName(@RequestParam(name = "query") String name,
                                            @PageableDefault(page = 0, size = 2, sort = {"empId"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        return employeeService.findByName(name,pageable);
+        return employeeService.findByName(name, pageable);
     }
-
-
 
 
     @GetMapping(value = "")
@@ -47,24 +45,22 @@ public class EmployeeController {
         final Employee savedEmployee = employeeService.addEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);
     }
+        @PutMapping("/{id}")
+        public Employee updateEmployee (@PathVariable(name = "id") Long id, @Valid @RequestBody Employee employee){
 
-    @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable(name = "id") Long id, @Valid @RequestBody Employee employee) {
+            return employeeService.updateEmployee(id, employee);
+        }
 
-        return employeeService.updateEmployee(id, employee);
+        @DeleteMapping("")
+
+        public void deleteAllEmployees () {
+            employeeService.deleteAllEmployees();
+        }
+
+        @DeleteMapping("/{id}")
+        public void deleteEmployee (@PathVariable(name = "id") Long id){
+            employeeService.delete(id);
+        }
+
+
     }
-
-    @DeleteMapping("")
-
-    public void deleteAllEmployees() {
-        employeeService.deleteAllEmployees();
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable(name = "id") Long id) {
-        employeeService.delete(id);
-    }
-
-
-
-}
