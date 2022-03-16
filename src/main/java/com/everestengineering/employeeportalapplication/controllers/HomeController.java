@@ -20,7 +20,6 @@ private EmployeeController employeeController;
         model.addAttribute("employees",allEmployees);
         return "index";
     }
-
     @GetMapping("/login")
     public String login() {
         return "login";
