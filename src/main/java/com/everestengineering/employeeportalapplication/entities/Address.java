@@ -4,6 +4,7 @@ package com.everestengineering.employeeportalapplication.entities;
 
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Address {
     private String addressLine2;
     @Pattern(regexp = "[A-Za-z ]*", message = "Please enter only alpha characters.")
     private String city;
+    @NonNull
     @Pattern(regexp = "[A-Za-z ]*", message = "Please enter only alpha characters.")
     private String state;
     private Long zipCode;
