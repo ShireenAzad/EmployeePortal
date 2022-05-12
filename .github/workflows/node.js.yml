@@ -28,7 +28,7 @@ jobs:
       working-directory: frontend/
       run: npm ci
     - name: npm test
-      working-directory: frontend/
+      working-directory: frontend/src/
       run: npm test
     - name: running npm run build --if-present
       working-directory: frontend/
