@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on master branch push
+    name: Deploy to EC2 on main branch push
     runs-on: ubuntu-latest
 
     steps:
@@ -21,4 +21,5 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH__KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USER_NAME }}
+          TARGET_DIR: ${{secrets.TARGET_DIR}}
           
