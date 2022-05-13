@@ -21,5 +21,4 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USER_NAME }}
-          TARGET: ${ { secrets.TARGET_DIR }}
           
