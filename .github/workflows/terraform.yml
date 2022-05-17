@@ -80,7 +80,7 @@ jobs:
       run: terraform init
 
     # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform validate
+    - name: Terraform validate of config files
       working-directory: TERRAFORM/
       run: terraform validate
 
