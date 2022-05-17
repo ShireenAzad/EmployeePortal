@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+TERRAFORM/.terraform/providers/registry.terraform.io/hashicorp/aws/4.14.0/darwin_amd64/terraform-provider-aws_v4.14.0_x5 
