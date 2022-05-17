@@ -10,7 +10,7 @@ resource "tls_private_key" "pk" {
 
 resource "aws_key_pair" "employeeportalsecretkey" {
   key_name   = "employeeportalsecretkey" # Create a "myKey" to AWS!!
-  public_key = ${{secrets.PUBLIC_KEY}}
+  public_key = var.public_key
 
   provisioner "local-exec" { 
     command = "echo '${tls_private_key.pk.private_key_pem}' > ./employeeportalsecretkey.pem"
@@ -47,6 +47,14 @@ resource "aws_security_group" "security_port" {
   tags = {
     Name = "security_port"
   }
+  connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ubuntu"
+      private_key = var.private_key
+      timeout     = "4m"
+   }
+
 }
 
 resource "aws_instance" "employeePortal" {
