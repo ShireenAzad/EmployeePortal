@@ -80,9 +80,9 @@ jobs:
       run: terraform init
 
     # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
+    - name: Terraform validate
       working-directory: TERRAFORM/
-      run: terraform fmt -check
+      run: terraform validate
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
