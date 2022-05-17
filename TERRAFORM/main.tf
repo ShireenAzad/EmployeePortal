@@ -46,13 +46,7 @@ resource "aws_security_group" "security_port" {
   tags = {
     Name = "security_port"
   }
-  connection {
-      type        = "ssh"
-      host        = self.public_ip
-      user        = "ubuntu"
-      private_key = var.private_key
-      timeout     = "4m"
-   }
+  
 
 }
 
@@ -64,5 +58,18 @@ resource "aws_instance" "employeePortal" {
   tags = {
     Name = "employeeportal_ec2_instance"
   }
+  connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ubuntu"
+      private_key = var.private_key
+      timeout     = "4m"
+   }
+   backend "s3" {
+    bucket = "mybucket"
+    key    = "../TERRAFORM/terraform.tfstate"
+    region = "us-east-1"
+  }
+
 }
 
