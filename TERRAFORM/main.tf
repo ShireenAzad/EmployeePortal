@@ -11,7 +11,6 @@ resource "tls_private_key" "pk" {
 resource "aws_key_pair" "employeeportalsecretkey" {
   key_name   = "employeeportalsecretkey" # Create a "myKey" to AWS!!
   public_key = var.public_key
-
   provisioner "local-exec" { 
     command = "echo '${tls_private_key.pk.private_key_pem}' > ./employeeportalsecretkey.pem"
   }
