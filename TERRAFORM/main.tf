@@ -49,7 +49,13 @@ resource "aws_security_group" "security_port" {
   
 
 }
-
+terraform {
+  backend "s3" {
+    bucket = "mybucket"
+    key    = "../TERRAFORM/terraform.tfstate"
+    region = "ap-south-1"
+  }
+}
 resource "aws_instance" "employeePortal" {
   ami             = "ami-0756a1c858554433e"
   key_name        ="employeeportalsecretkey"
@@ -58,6 +64,7 @@ resource "aws_instance" "employeePortal" {
   tags = {
     Name = "employeeportal_ec2_instance"
   }
+  
   connection {
       type        = "ssh"
       host        = self.public_ip
@@ -65,11 +72,7 @@ resource "aws_instance" "employeePortal" {
       private_key = var.private_key
       timeout     = "4m"
    }
-   backend "s3" {
-    bucket = "mybucket"
-    key    = "../TERRAFORM/terraform.tfstate"
-    region = "us-east-1"
-  }
+   
 
 }
 
