@@ -3,6 +3,7 @@ provider "aws" {
   shared_config_files = ["/Users/shireenazad/.aws/config"]
   profile             = "shireen_syed"
 }
+
 resource "tls_private_key" "pk" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -11,7 +12,7 @@ resource "tls_private_key" "pk" {
 resource "aws_key_pair" "employeeportalsecretkey" {
   key_name   = "employeeportalsecretkey" # Create a "myKey" to AWS!!
   public_key = var.public_key
-  provisioner "local-exec" { 
+  provisioner "local-exec" {
     command = "echo '${tls_private_key.pk.private_key_pem}' > ./employeeportalsecretkey.pem"
   }
 }
@@ -46,33 +47,25 @@ resource "aws_security_group" "security_port" {
   tags = {
     Name = "security_port"
   }
-  
+
 
 }
-terraform {
-  backend "s3" {
-    bucket = "mybucket"
-    key    = "../TERRAFORM/terraform.tfstate"
-    region = "ap-south-1"
-  }
-}
+
 resource "aws_instance" "employeePortal" {
   ami             = "ami-0756a1c858554433e"
-  key_name        ="employeeportalsecretkey"
+  key_name        = "employeeportalsecretkey"
   instance_type   = var.instance_type
   security_groups = ["security_port"]
   tags = {
     Name = "employeeportal_ec2_instance"
   }
-  
-  connection {
-      type        = "ssh"
-      host        = self.public_ip
-      user        = "ubuntu"
-      private_key = var.private_key
-      timeout     = "4m"
-   }
-   
 
+  connection {
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = var.private_key
+    timeout     = "4m"
+  }
 }
 
