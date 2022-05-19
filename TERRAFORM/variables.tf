@@ -19,10 +19,3 @@ variable "public_key" {
 variable "private_key" {
 
 }
-variable "secret_access_key" {
-
-
-}
-variable "access_key_id" {
-
-}
