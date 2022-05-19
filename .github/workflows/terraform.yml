@@ -90,6 +90,8 @@ jobs:
       env:
         TF_VAR_PUBLIC_KEY: ${{secrets.TF_VAR_PUBLIC_KEY}}
         TF_VAR_PRIVATE_KEY: ${{secrets.TF_VAR_PRIVATE_KEY}}
+        TF_VAR_SECRET_ACCESS_KEY: ${{secrets.TF_VAR_SECRET_ACCESS_KEY}}
+        TF_VAR_ACCESS_KEY_ID: ${{secrets.TF_VAR_ACCESS_KEY_ID}}
       run: terraform plan -input=false
 
       # On push to main, build or change infrastructure according to Terraform configuration files
