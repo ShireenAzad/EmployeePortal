@@ -1,7 +1,8 @@
 provider "aws" {
   region              = var.aws_region
   shared_config_files = ["/Users/shireenazad/.aws/config"]
-  profile             = "shireen_syed"
+  profile             = "shireen__syed"
+  
 }
 
 resource "tls_private_key" "pk" {
