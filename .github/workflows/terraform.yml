@@ -92,7 +92,9 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       working-directory: TERRAFORM/
-    
+      env:
+        TF_VAR_public_key: ${{secrets.TF_VAR_PUBLIC_KEY}}
+        TF_VAR_private_key: ${{secrets.TF_VAR_PRIVATE_KEY}}
       run: terraform plan -input=false
 
       # On push to main, build or change infrastructure according to Terraform configuration files
