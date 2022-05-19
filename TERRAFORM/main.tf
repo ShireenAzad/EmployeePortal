@@ -1,7 +1,5 @@
 provider "aws" {
   region              = var.aws_region
-  profile             = "shireen_syed"
-  
 }
 
 resource "tls_private_key" "pk" {
