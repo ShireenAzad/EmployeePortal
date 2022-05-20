@@ -1,5 +1,8 @@
 provider "aws" {
-  region              = var.aws_region
+  region    = var.aws_region
+  access_key = var.AWS_ACCESS_KEY
+  secret_key = var.AWS_SECRET_KEY
+  profile = "shireen_syed"
 }
 
 resource "tls_private_key" "pk" {
@@ -7,6 +10,16 @@ resource "tls_private_key" "pk" {
   rsa_bits  = 4096
 }
 
+resource "aws_s3_bucket" "employeeportalbucket" {
+  bucket_prefix = var.bucket_prefix
+  acl = var.acl
+  
+   versioning {
+    enabled = var.versioning
+  }
+  
+  tags = var.tags
+}
 resource "aws_key_pair" "employeeportalsecretkey" {
   key_name   = "employeeportalsecretkey" # Create a "myKey" to AWS!!
   public_key = var.public_key
@@ -67,3 +80,12 @@ resource "aws_instance" "employeePortal" {
   }
 }
 
+ terraform {
+  backend "s3" {
+    bucket = "employeeportalbuckett"
+    key    = "terraform.tfstate"
+    region = "ap-south-1"
+    profile = "shireen_syed"
+  }
+}
+ 
