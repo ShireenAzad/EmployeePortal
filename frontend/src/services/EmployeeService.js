@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = `http://${process.env.REACT_APP_IP_ADDRESS}:8080/api/employees`;
+const API_BASE_URL = "http://"+${process.env.REACT_APP_IP_ADDRESS}+":8080";
 console.log(process.env.REACT_APP_IP_ADDRESS)
 export function getAllEmployees() {
   return axios.get(`${API_BASE_URL}/api/employees`);
