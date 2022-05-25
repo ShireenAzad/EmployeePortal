@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL = `http://${process.env.REACT_APP_IP_ADDRESS}:8080/api/employees`;
-console.log(REACT_APP_IP_ADDRESS)
+console.log(process.env.REACT_APP_IP_ADDRESS)
 export function getAllEmployees() {
   return axios.get(`${API_BASE_URL}/api/employees`);
 }
